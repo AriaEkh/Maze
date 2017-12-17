@@ -8,8 +8,16 @@ namespace Maze
 {
     class Program
     {
+        private static void Start()
+        {
+            Console.WriteLine("Enter the filename: ");
+            string filename = Console.ReadLine();
+            Game test = new Game(filename);
+        }
         static void Main(string[] args)
         {
+            Start();
+            Console.ReadKey();
         }
     }
 }
