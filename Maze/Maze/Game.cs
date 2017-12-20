@@ -13,6 +13,7 @@ namespace Maze
         private Case[] Board;
         private int length;
         private int lineLength;
+        private int playerCount;
 
 
         public Game(string file)
