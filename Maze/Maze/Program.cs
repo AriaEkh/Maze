@@ -13,6 +13,8 @@ namespace Maze
             Console.WriteLine("Enter the filename: ");
             string filename = Console.ReadLine();
             Game test = new Game(filename);
+            test.ShowMaze();
+            
         }
         static void Main(string[] args)
         {
