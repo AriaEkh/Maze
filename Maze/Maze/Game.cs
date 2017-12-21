@@ -25,5 +25,19 @@ namespace Maze
             maze.ShowMaze();
         }
 
+        /*public void PlacePlayer()
+        {
+            double percent = Math.Floor(maze.Length * 0.10);
+            Random rnd = new Random();
+            for (int i = 1; i <= percent; i++)
+            {
+                Player player = new Player();
+                player.Id = i;
+                int coord = rnd.Next(maze.Length);
+                while(maze != )
+
+            }
+        }*/
+
     }       
 }

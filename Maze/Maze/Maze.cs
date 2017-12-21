@@ -10,18 +10,12 @@ namespace Maze
         private Case[] board;
 
         private int length;
-
+        private int emptyCase;
+        private double lineCount;
         private double lineLength;
-
-        double lineCount;
-
         #endregion Private Fields
 
-        #region Private Enums
-
-        private enum Case
-        { empty, wall, exit };
-        #endregion Private Enums
+        #region Public Constructors
 
         public Maze()
         {
@@ -31,7 +25,28 @@ namespace Maze
             board = null;
         }
 
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public int Emptycase
+        {
+            get { return emptyCase; }
+        }
+
+        public int Length
+        {
+            get { return length; }
+        }
+
+        #endregion Public Properties
+
         #region Public Methods
+
+        public void addEntity(Entity entity, int coord)
+        {
+            board[coord].Entity = entity;
+        }
 
         public void CreateMaze(string file)
         {
@@ -45,10 +60,10 @@ namespace Maze
                     sr.BaseStream.Position = 0;
                     sr.DiscardBufferedData();
 
-                    while(sr.EndOfStream==false)
+                    while (sr.EndOfStream == false)
                     {
                         sr.ReadLine();
-                        lineCount++;
+                        lineCount += 1;
                     }
 
                     sr.BaseStream.Position = 0;
@@ -56,7 +71,7 @@ namespace Maze
 
                     double temp = lineCount * lineLength;
                     length = Convert.ToInt32(temp);
-                    this.board = new Case[length];
+                    board = new Case[length];
                     int count = 0;
                     for (int j = 0; j < length / lineLength; j++)
                     {
@@ -65,17 +80,18 @@ namespace Maze
                         {
                             if (tempLine[i] == '0')
                             {
-                                board[count] = Case.empty;
+                                board[count] = new Case(Case.CaseType.empty);
+                                emptyCase += 1;
                                 count += 1;
                             }
                             else if (tempLine[i] == '1')
                             {
-                                board[count] = Case.wall;
+                                board[count] = new Case(Case.CaseType.wall);
                                 count += 1;
                             }
                             else if (tempLine[i] == '2')
                             {
-                                board[count] = Case.exit;
+                                board[count] = new Case(Case.CaseType.exit);
                                 count += 1;
                             }
                         }
@@ -95,12 +111,12 @@ namespace Maze
             {
                 for (int i = 0; i < lineLength; i++)
                 {
-                    if (board[count] == Case.empty || board[count] == Case.exit)
+                    if (board[count].Type == Case.CaseType.empty || board[count].Type == Case.CaseType.exit)
                     {
                         count++;
                         Console.Write(" ");
                     }
-                    else if (board[count] == Case.wall)
+                    else if (board[count].Type == Case.CaseType.wall)
                     {
                         count++;
                         Console.Write("*");
@@ -109,6 +125,7 @@ namespace Maze
                 Console.WriteLine("\n");
             }
         }
+
         #endregion Public Methods
     }
 }

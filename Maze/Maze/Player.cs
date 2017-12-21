@@ -53,13 +53,13 @@ namespace Maze
 
         public void Attack(Player ennemy)
         {
-            if (ennemy.HP >= damage && weapons[0].Damage>0)
+            if (ennemy.HP >= damage && weapons[0].Damage > 0)
             {
                 ennemy.HP -= damage;
                 weapons[0].Damage -= 1;
                 damage -= 1;
             }
-            else if(weapons[0].Damage==0 && weapons[1]!= null)
+            else if (weapons[0].Damage == 0 && weapons[1] != null)
             {
                 damage += weapons[1].Damage;
                 weapons.RemoveAt(0);
@@ -67,7 +67,7 @@ namespace Maze
                 weapons[0].Damage -= 1;
                 damage -= 1;
             }
-            else if(ennemy.HP < damage)
+            else if (ennemy.HP < damage)
             {
                 weapons[0].Damage -= 1;
                 damage -= 1;
@@ -78,15 +78,14 @@ namespace Maze
         public void GrabWeapon(Weapon weapon)
         {
             weapons.Add(weapon);
-            if (aggro==false)
+            if (aggro == false)
             {
                 aggro = true;
             }
-            if (weapons[1]==null)
+            if (weapons[1] == null)
             {
                 damage += weapon.Damage;
             }
-            
         }
 
         #endregion Public Methods
