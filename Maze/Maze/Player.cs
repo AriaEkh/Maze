@@ -16,9 +16,9 @@ namespace Maze
 
         #region Public Constructors
 
-        public Player(int ID)
+        public Player()
         {
-            id = ID;
+            id = 0;
             weapons = new List<Weapon>();
             HP = 100;
             aggro = false;
@@ -44,6 +44,7 @@ namespace Maze
         public int Id
         {
             get { return id; }
+            set { id = value; }
         }
 
         #endregion Public Properties
@@ -52,19 +53,24 @@ namespace Maze
 
         public void Attack(Player ennemy)
         {
-            if (ennemy.HP >= weapons[0].Damage && weapons[0].Damage>0)
+            if (ennemy.HP >= damage && weapons[0].Damage>0)
             {
-                ennemy.HP -= weapons[0].Damage;
+                ennemy.HP -= damage;
                 weapons[0].Damage -= 1;
+                damage -= 1;
             }
             else if(weapons[0].Damage==0 && weapons[1]!= null)
             {
+                damage += weapons[1].Damage;
                 weapons.RemoveAt(0);
-                ennemy.HP -= weapons[0].Damage;
+                ennemy.HP -= damage;
                 weapons[0].Damage -= 1;
+                damage -= 1;
             }
-            else if(ennemy.HP < weapons[0].Damage)
+            else if(ennemy.HP < damage)
             {
+                weapons[0].Damage -= 1;
+                damage -= 1;
                 ennemy.HP = 0;
             }
         }
@@ -72,7 +78,15 @@ namespace Maze
         public void GrabWeapon(Weapon weapon)
         {
             weapons.Add(weapon);
-            damage += weapon.Damage;
+            if (aggro==false)
+            {
+                aggro = true;
+            }
+            if (weapons[1]==null)
+            {
+                damage += weapon.Damage;
+            }
+            
         }
 
         #endregion Public Methods
