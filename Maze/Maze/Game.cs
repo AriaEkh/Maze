@@ -40,23 +40,31 @@ namespace Maze
                     sr.DiscardBufferedData();
 
                     this.Board = new Case[length];
-                    Console.WriteLine((char)sr.Read());
-                    for (int i = 0; i < length; i++)
+                    int count = 0;
+                    for (int j = 0; j < length/lineLength; j++)
                     {
-                        if((char)sr.Read() == '0')
+                        string tempLine = sr.ReadLine();
+                        for (int i = 0; i < tempLine.Length; i++)
                         {
-                            Board[i] = Case.empty;
-                        }
-                        else if ((char)sr.Read() == '1')
-                        {
-                            Board[i] = Case.wall;
-                        }
-                        else if ((char)sr.Read() == '2')
-                        {
-                            Board[i] = Case.exit;
-                        }
+                            if (tempLine[i] == '0')
+                            {
+                                Board[count] = Case.empty;
+                                count += 1;
+                            }
+                            else if (tempLine[i] == '1')
+                            {
+                                Board[count] = Case.wall;
+                                count += 1;
+                            }
+                            else if (tempLine[i] == '2')
+                            {
+                                Board[count] = Case.exit;
+                                count += 1;
+                            }
 
+                        }
                     }
+                    
                     
                 }
             }
@@ -68,17 +76,20 @@ namespace Maze
 
         public void ShowMaze()
         {
+            int count = 0;
             for (int j = 0; j < length/lineLength; j++)
             {
                 for (int i = 0; i < lineLength; i++)
                 {
-                    if (Board[i] == Case.empty || Board[i] == Case.exit)
+                    if (Board[count] == Case.empty || Board[count] == Case.exit)
                     {
+                        count ++;
                         Console.Write(" ");
                     }
-                    else if (Board[i] == Case.wall)
+                    else if (Board[count] == Case.wall)
                     {
-                        Console.Write("#");
+                        count++;
+                        Console.Write("|");
                     }
                 }
                 Console.WriteLine("\n");
