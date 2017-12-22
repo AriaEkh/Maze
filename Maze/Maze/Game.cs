@@ -35,7 +35,7 @@ namespace Maze
             int count = 0;
             for (int i = 0; i < maze.Length; i++)
             {
-                if(maze.Board[i].Type== Case.CaseType.empty)
+                if(maze.Board[i].Type== Case.CaseType.empty && maze.Board[i].Entity == null)
                 {
                     list[count] = i;
                     count++;
@@ -50,7 +50,6 @@ namespace Maze
         public void PlacePlayer()
         {
             int numberPlayer = (int)Math.Round(maze.Emptycase*0.01,0);
-            Console.WriteLine(numberPlayer);
             for (int i=0;i< numberPlayer;i++)
             {
                 Random rnd = new Random();
