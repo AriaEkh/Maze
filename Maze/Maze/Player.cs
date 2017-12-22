@@ -16,9 +16,9 @@ namespace Maze
 
         #region Public Constructors
 
-        public Player()
+        public Player(int id)
         {
-            id = 0;
+            this.id = id;
             weapons = new List<Weapon>();
             HP = 100;
             aggro = false;

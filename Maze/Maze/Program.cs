@@ -10,15 +10,17 @@ namespace Maze
     {
         private static void Start()
         {
-            Console.WriteLine("Enter the filename: ");
-            string filename = Console.ReadLine();
-            Game test = new Game(filename);
+            Game test = new Game("maze.txt");
+          
+            test.PlacePlayer();
             test.ShowMaze();
-            
+
+
         }
         static void Main(string[] args)
         {
             Start();
+            
             Console.ReadKey();
         }
     }

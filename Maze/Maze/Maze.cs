@@ -39,6 +39,19 @@ namespace Maze
             get { return length; }
         }
 
+        internal Case[] Board
+        {
+            get
+            {
+                return board;
+            }
+
+            set
+            {
+                board = value;
+            }
+        }
+
         #endregion Public Properties
 
         #region Public Methods
@@ -113,14 +126,21 @@ namespace Maze
                 {
                     if (board[count].Type == Case.CaseType.empty || board[count].Type == Case.CaseType.exit)
                     {
-                        count++;
+                        
                         Console.Write(" ");
                     }
-                    else if (board[count].Type == Case.CaseType.wall)
+                    if (board[count].Entity!= null)
                     {
-                        count++;
+                       
+                        Console.Write("O");
+                    }
+                    if (board[count].Type == Case.CaseType.wall)
+                    {
+                       
                         Console.Write("*");
                     }
+                    count++;
+
                 }
                 Console.WriteLine("\n");
             }

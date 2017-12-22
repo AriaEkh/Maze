@@ -25,19 +25,46 @@ namespace Maze
             maze.ShowMaze();
         }
 
-        /*public void PlacePlayer()
+        public int FoundEmptyAlea(int alea)
         {
-            double percent = Math.Floor(maze.Length * 0.10);
-            Random rnd = new Random();
-            for (int i = 1; i <= percent; i++)
+            int[] list =new int[maze.Length];
+            for (int i=0;i<maze.Length;i++)
             {
-                Player player = new Player();
-                player.Id = i;
-                int coord = rnd.Next(maze.Length);
-                while(maze != )
-
+                list[i] = -1;
             }
-        }*/
+            int count = 0;
+            for (int i = 0; i < maze.Length; i++)
+            {
+                if(maze.Board[i].Type== Case.CaseType.empty)
+                {
+                    list[count] = i;
+                    count++;
+                }
+            }
+            return list[alea];
+
+
+
+        }
+
+        public void PlacePlayer()
+        {
+            int numberPlayer = (int)Math.Round(maze.Emptycase*0.01,0);
+            Console.WriteLine(numberPlayer);
+            for (int i=0;i< numberPlayer;i++)
+            {
+                Random rnd = new Random();
+                int alea = rnd.Next(0, maze.Emptycase-1);
+                int position = FoundEmptyAlea(alea);
+                Player player = new Player(i);
+                maze.addEntity(player, position);
+                
+
+                 
+                
+           }
+        }
+        
 
     }       
 }
